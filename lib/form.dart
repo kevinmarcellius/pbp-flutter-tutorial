@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:demoapp/main.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
 
 class MyFormPage extends StatefulWidget {
   const MyFormPage({super.key});
-
+  final String title = 'Flutter Demo Home Page';
   @override
   State<MyFormPage> createState() => _MyFormPageState();
 }
@@ -23,6 +39,33 @@ class _MyFormPageState extends State<MyFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Form'),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            // Menambahkan clickable menu
+            ListTile(
+              title: const Text('Counter'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Form'),
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyFormPage()),
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: Form(
         key: _formKey,
